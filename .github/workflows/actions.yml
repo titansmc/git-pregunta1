@@ -1,0 +1,25 @@
+name: Compile
+
+on:
+  push:
+    branch: [ main ]
+
+  jobs:
+    compile-linux:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout del repo
+          uses: actions/checkout@v4
+
+        - name: Configurem Python
+          uses: actions/setup-python@v7
+          with:
+            python-version: '3.13'
+
+        - name: Instalem paquets
+          run: pip install pyinstaller
+
+        - name: Empaquetem
+          run: pyinstaller --onefile comprova_desplegaments.py
+
